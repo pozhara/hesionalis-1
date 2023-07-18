@@ -36,7 +36,7 @@
                     </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a href="#" class="nav-link">Appointments</a>
+                        <a href="{% url 'create_appointment' %}" class="nav-link">Appointments</a>
                     </li>
                     <li class="nav-item">
                         <a href="{% url 'edit_profile' %}" class="nav-link">{{ user.username }}</a>
@@ -102,7 +102,7 @@
                                 <a href="{% url 'styles' %}" class="text-white">Styles</a>
                             </li>
                             <li>
-                                <a href="#!" class="text-white">Bookings</a>
+                                <a href="{% url 'create_appointment' %}" class="text-white">Bookings</a>
                             </li>
                             <li>
                                 <a href="{% url 'faq' %}" class="text-white">FAQ</a>

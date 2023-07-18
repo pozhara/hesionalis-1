@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 from core.forms import LoginForm
-from core.views import HomeView, ArtistView, DesignsView, FAQView, RegisterView, CustomLoginView, LogoutView, EditProfileView, PasswordChangeView
+from core.views import HomeView, ArtistView, DesignsView, FAQView, RegisterView, CustomLoginView, LogoutView, EditProfileView, PasswordChangeView, CreateAppointmentView
 
 urlpatterns = [
     path('edit_profile/', EditProfileView.as_view(), name='edit_profile'),
@@ -30,5 +30,6 @@ urlpatterns = [
     path('login/', CustomLoginView.as_view(redirect_authenticated_user=True, template_name='login.html',
                                            authentication_form=LoginForm), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
+    path('create_appointment/', CreateAppointmentView.as_view(), name='create_appointment'),
     path('admin/', admin.site.urls),
 ]

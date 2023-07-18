@@ -13,7 +13,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 
 from core.models import Artist, Design, Appointment
-from .forms import RegisterForm, LoginForm, EditProfileForm, PasswordChangeForm
+from .forms import RegisterForm, LoginForm, EditProfileForm, PasswordChangeForm, AppointmentForm
 
 faqs = [
     {
@@ -197,3 +197,35 @@ class PasswordChangeView(View):
 
         context = {"change_password": change_password}
         return render(request, 'edit_password.html', context)
+
+
+class CreateAppointmentView(LoginRequiredMixin, View):
+    
+    template_name = 'appointment_form.html'
+    login_url = '/login/?next=/appointment/create/'
+
+    def get(self, request, artist_id=None):
+        form = AppointmentForm()
+        if artist_id is not None:
+
+            form.fields['artist'].initial = artist_id
+
+        return render(request, 'appointment_form.html', {'form': form})
+
+    def post(self, request, artist_id=None):
+
+        form = AppointmentForm(request.POST)
+        if form.is_valid():
+
+            appointment = form.save(commit=False)
+            appointment.user = request.user
+            appointment.save()
+            messages.success(request, "Appointment was requested successfully!")
+            return redirect('appointment')
+
+        return render(request, 'appointment_form.html', {'form': form})
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            messages.error(request, 'Please log in to create an appointment.')
+        return super().dispatch(request, *args, **kwargs)

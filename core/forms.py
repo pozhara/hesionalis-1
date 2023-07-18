@@ -171,3 +171,31 @@ class PasswordChangeForm(DefaultPasswordChangeForm):
             'autocomplete': 'off',
             'class': 'form-input'
         })
+
+
+class AppointmentForm(forms.ModelForm):
+    tattoo_location = forms.ChoiceField(choices=TATTOO_LOCATION,
+                                        required=True,
+                                        widget=forms.Select(attrs={
+                                           'class': 'form-input'}))
+    tattoo_size = forms.ChoiceField(choices=TATTOO_SIZE,
+                                    required=True,
+                                    widget=forms.Select(attrs={
+                                       'class': 'form-input'}))
+    tattoo_category = forms.ChoiceField(choices=TATTOO_CATEGORY,
+                                        required=True,
+                                        widget=forms.Select(attrs={
+                                            'class': 'form-input'}))
+    artist = forms.ModelChoiceField(queryset=Artist.objects.all(),
+                                    required=True,
+                                    widget=forms.Select(attrs={
+                                        'class': 'form-input'}))
+    contact_way = forms.ChoiceField(choices=PREFERRED_CONTACT_WAY,
+                                    required=True,
+                                    widget=forms.Select(attrs={
+                                        'class': 'form-input'}))
+
+    class Meta:
+        model = Appointment
+        fields = ['tattoo_location',
+                  'tattoo_size', 'tattoo_category', 'artist', 'contact_way']
