@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@800&display=swap');
+
+
+body {
+  padding: 0;
+  margin: 0;
+  min-height: 100vh;
+  background-color: #090909cb;
+}
+
+.font{
+  font-family: 'League Spartan', sans-serif;
+}
+
+.font-2{
+  font-family:'Rubik', sans-serif;
+}
+
+.font-size{
+  font-size:40px;
+}
+
+.font-size-2{
+  font-size:20px;
+}
+
+.font-size-2{
+  font-size:25px;
+}
+
+.font-size-3{
+  font-size:20px;
+}
+
+.bg-btn-color{
+  background-color:#7765D2;
+}
+
+.bg-btn-color-2{
+  background-color: #FFCA80;
+}
+
+.bg-color{
+  background-color:#ffdfb490;
+}
+
+.bg-color-2{
+  background-color:#f8d6a7;
+}
+
+.bg-color-3{
+  background-color:#fadbaf;
+}
+
+.color{
+  color:#FFCA80;
+}
+
+.color-2{
+  color:#090909cb;
+}
+
+.color-3{
+  color:#7765D2;
+}
+
+#tattoo-heart{
+  height:100vh;
+  background-image: url("https://res.cloudinary.com/dehoeoirf/image/upload/v1688570958/Untitled_cf3mcl.jpg");
+  background-size: auto;
+  background: linear-gradient(#030000, 20%);
+}
+
+.fa-solid{
+  font-size:30px;
+}
+
+#register-link a:link, #register-link a:active, #register-link a:visited{
+  text-decoration: none;
+}
+
+#register-link a:hover{
+  color:white;
+}
