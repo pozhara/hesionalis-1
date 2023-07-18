@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container text-center text-uppercase font">
+    <h1 class="color pb-2 pt-5 font">Frequently asked questions</h1>
+</div>
+
+<div class="container justify-center">
+    <div>
+        {% for faq in faqs %}
+        <details class="my-3 border rounded text-white font-2">
+            <summary class="px-2 font-size-2">{{ faq.question }}</summary>
+            <hr>
+            <p class="px-2 font-size-3">{{ faq.answer }}</p>
+        </details>
+
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

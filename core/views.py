@@ -75,3 +75,8 @@ class DesignsView(View):
         designs = Design.objects.all()
         size = ['large', "medium", "small"]
         return render(request, 'styles.html', context={'size': size, "designs": designs})
+
+
+class FAQView(View):
+    def get(self, request):
+        return render(request, 'faq.html', context={"faqs": faqs})

@@ -32,7 +32,7 @@
                         <a href="#" class="nav-link">Booking</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">FAQ</a>
+                        <a href="{% url 'faq' %}" class="nav-link">FAQ</a>
                     </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item">
@@ -105,7 +105,7 @@
                                 <a href="#!" class="text-white">Bookings</a>
                             </li>
                             <li>
-                                <a href="#" class="text-white">FAQ</a>
+                                <a href="{% url 'faq' %}" class="text-white">FAQ</a>
                             </li>
                         </ul>
                     </div>
