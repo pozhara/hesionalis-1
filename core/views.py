@@ -63,3 +63,8 @@ class HomeView(View):
         artists = Artist.objects.all()
         return render(request, 'index.html', context={"artists": artists})
 
+
+class ArtistView(ListView):
+    model = Artist
+    template_name = 'artists.html'
+    context_object_name = 'artists'
