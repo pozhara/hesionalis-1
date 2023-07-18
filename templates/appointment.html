@@ -26,13 +26,21 @@
             </div>
         </div>
         <div>
-            <button type="submit"><a href="#">Delete</a></button>
+            <form method="post" action="{% url 'delete_appointment' appointment.id %}" class="text-center font-2">
+                {% csrf_token %}
+
+
+
+                <button type="submit" class="cursor-pointer" class="btn bg-btn-color btn-xl text-uppercase text-white">Delete</button>
+
+
+            </form>
         </div>
     </div>
-    <hr/>
+    <hr />
 
 
-        {%endfor%}
+    {%endfor%}
     {%else%}
     <div class="my-4 py-4 text-center text-uppercase font-2">
         <h1 class="color">
@@ -41,7 +49,8 @@
     </div>
     <div>
         <div class="font-2 text-center my-2">
-            <a href="{% url 'create_appointment' %}" class="btn bg-btn-color btn-xl text-uppercase text-white my-2">Request An Appointment</a>
+            <a href="{% url 'create_appointment' %}"
+                class="btn bg-btn-color btn-xl text-uppercase text-white my-2">Request An Appointment</a>
         </div>
     </div>
 </div>

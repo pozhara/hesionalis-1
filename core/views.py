@@ -239,3 +239,11 @@ class AppointmentView(LoginRequiredMixin, View):
     def get(self, request):
         appointments = Appointment.objects.filter(user__email=request.user.email)
         return render(request, self.template_name, {'appointments': appointments})
+
+
+class AppointmentDeleteView(DeleteView):
+    def post(self, request, appointment_id):
+        appointment_to_delete = Appointment.objects.get(id = appointment_id)
+        appointment_to_delete.delete()
+        messages.success(request, "Appointment has been successfully deleted!")
+        return redirect('appointment') 
