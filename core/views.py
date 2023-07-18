@@ -13,7 +13,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 
 from core.models import Artist, Design, Appointment
-from .forms import RegisterForm, LoginForm
+from .forms import RegisterForm, LoginForm, EditProfileForm
 
 faqs = [
     {
@@ -128,3 +128,38 @@ class LogoutView(View):
         logout(request)
         messages.success(request, "You have successfully logged out")
         return redirect('home')
+
+
+class EditProfileView(View):
+    def get(self, request):
+        user = request.user
+        if not user:
+            return redirect('login')
+        profile = EditProfileForm(initial={
+                                  'first_name': user.first_name, 'last_name': user.last_name})
+        username = request.user.username
+        context = {'profile': profile}
+        return render(request, 'edit_profile.html', context)
+
+    def post(self, request):
+        user = request.user
+        if not user:
+            # Retrieve the user from the database
+            return redirect('login')
+        form = EditProfileForm(request.POST or None, instance=user)
+
+        if form.is_valid():
+            # Update the user data and save the changes
+            user = request.user
+            if request.method == 'POST':
+                if form.is_valid():
+                    user.first_name = form.cleaned_data['first_name']
+                    user.last_name = form.cleaned_data['last_name']
+                    form.save()
+                    messages.success(request, "Your profile has been successfully updated!")
+                    return redirect('home')
+        else:
+            messages.error(request, "Please provide valid information")
+            return redirect('edit_profile')
+        context = {'form': form}
+        return render(request, 'edit_profile.html', context)
