@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from core.views import HomeView, ArtistView, DesignsView, FAQView, RegisterView
+
+from core.forms import LoginForm
+from core.views import HomeView, ArtistView, DesignsView, FAQView, RegisterView, CustomLoginView, LogoutView
 
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
@@ -23,5 +25,8 @@ urlpatterns = [
     path('styles/', DesignsView.as_view(), name='styles'),
     path('faq/', FAQView.as_view(), name='faq'),
     path('register/', RegisterView.as_view(), name='register'),
+    path('login/', CustomLoginView.as_view(redirect_authenticated_user=True, template_name='login.html',
+                                           authentication_form=LoginForm), name='login'),
+    path('logout/', LogoutView.as_view(), name='logout'),
     path('admin/', admin.site.urls),
 ]
