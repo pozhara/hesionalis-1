@@ -229,3 +229,13 @@ class CreateAppointmentView(LoginRequiredMixin, View):
         if not request.user.is_authenticated:
             messages.error(request, 'Please log in to create an appointment.')
         return super().dispatch(request, *args, **kwargs)
+
+
+class AppointmentView(LoginRequiredMixin, View):
+    template_name = 'appointment.html'
+    login_url = '/login/?next=/appointments/'
+    context_object_name = 'appointments'
+
+    def get(self, request):
+        appointments = Appointment.objects.filter(user__email=request.user.email)
+        return render(request, self.template_name, {'appointments': appointments})

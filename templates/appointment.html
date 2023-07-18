@@ -1,0 +1,50 @@
+{% extends 'base.html' %} {% block title %} Appointments {%endblock title %}
+{%block content %}
+
+{%if appointments%}
+<div>
+    <h1 class="color text-center text-uppercase font-2 py-4">
+        Appointments
+    </h1>
+
+    {% for appointment in appointments %}
+    <div class="container">
+        <div class="row color font-2 text-center">
+            <div class="col-lg-4 col-sm-2 px-2 py-3">Artist: {{appointment.artist.name}}</div>
+            <div class="col-lg-4 col-sm-2 px-2 py-3">Tattoo Location: {{appointment.tattoo_location}}</div>
+            <div class="col-lg-4 col-sm-2 px-2 py-3">Tattoo Size: {{appointment.tattoo_size}}</div>
+            <div class="col-lg-4 col-sm-2 px-2 py-3">Tattoo Category: {{appointment.tattoo_category}}</div>
+            <div class="col-lg-4 col-sm-2 px-2 py-3"> Created on: {{ appointment.created_on }}</div>
+            <div class="col-lg-4 col-sm-2 px-2 py-3">Status:
+                {% if appointment.status == 0 %}
+                Pending
+                {% elif appointment.status == 1 %}
+                Accepted
+                {% else %}
+                Rejected
+                {%endif%}
+            </div>
+        </div>
+        <div>
+            <button type="submit"><a href="#">Delete</a></button>
+        </div>
+    </div>
+    <hr/>
+
+
+        {%endfor%}
+    {%else%}
+    <div class="my-4 py-4 text-center text-uppercase font-2">
+        <h1 class="color">
+            No Appointments Found
+        </h1>
+    </div>
+    <div>
+        <div class="font-2 text-center my-2">
+            <a href="{% url 'create_appointment' %}" class="btn bg-btn-color btn-xl text-uppercase text-white my-2">Request An Appointment</a>
+        </div>
+    </div>
+</div>
+
+{%endif%}
+{%endblock %}
