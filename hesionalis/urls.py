@@ -17,10 +17,11 @@ from django.contrib import admin
 from django.urls import path, include
 
 from core.forms import LoginForm
-from core.views import HomeView, ArtistView, DesignsView, FAQView, RegisterView, CustomLoginView, LogoutView, EditProfileView
+from core.views import HomeView, ArtistView, DesignsView, FAQView, RegisterView, CustomLoginView, LogoutView, EditProfileView, PasswordChangeView
 
 urlpatterns = [
     path('edit_profile/', EditProfileView.as_view(), name='edit_profile'),
+    path("edit_password", PasswordChangeView.as_view(), name="edit_password"),
     path('', HomeView.as_view(), name='home'),
     path('artists/', ArtistView.as_view(), name='artists'),
     path('styles/', DesignsView.as_view(), name='styles'),

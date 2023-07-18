@@ -154,3 +154,20 @@ class EditProfileForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'phone_number']
+
+
+class PasswordChangeForm(DefaultPasswordChangeForm):
+    def __init__(self, user, *args, **kwargs):
+        super().__init__(user, *args, **kwargs)
+        self.fields['old_password'].widget.attrs.update({
+            'autocomplete': 'off',
+            'class': 'form-input'
+        })
+        self.fields['new_password1'].widget.attrs.update({
+            'autocomplete': 'off',
+            'class': 'form-input'
+        })
+        self.fields['new_password2'].widget.attrs.update({
+            'autocomplete': 'off',
+            'class': 'form-input'
+        })

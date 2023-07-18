@@ -13,7 +13,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 
 from core.models import Artist, Design, Appointment
-from .forms import RegisterForm, LoginForm, EditProfileForm
+from .forms import RegisterForm, LoginForm, EditProfileForm, PasswordChangeForm
 
 faqs = [
     {
@@ -163,3 +163,37 @@ class EditProfileView(View):
             return redirect('edit_profile')
         context = {'form': form}
         return render(request, 'edit_profile.html', context)
+
+
+class PasswordChangeView(View):
+    def get(self, request):
+        user = request.user
+        if not user:
+            return redirect('login')
+        change_password = PasswordChangeForm(user)
+        context = {"change_password": change_password}
+        return render(request, 'edit_password.html', context)
+
+    def post(self, request):
+        user = request.user
+        if not user:
+            # Retrieve the user from the database
+            return redirect('login')
+        change_password = PasswordChangeForm(request.user, request.POST)
+
+        if change_password.is_valid():
+
+            user = change_password.save()
+            print(user.password)
+            user.save()
+            update_session_auth_hash(request, user)
+            messages.success(
+                request, 'Your password has been successfully updated.')
+            change_password.cleaned_data['old_password'] = None
+            # Redirect to the same page after successful password change
+            return redirect('home')
+        else:
+            messages.error(request, 'Please provide your old password and confirm the new one')
+
+        context = {"change_password": change_password}
+        return render(request, 'edit_password.html', context)
