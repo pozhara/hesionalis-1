@@ -68,3 +68,10 @@ class ArtistView(ListView):
     model = Artist
     template_name = 'artists.html'
     context_object_name = 'artists'
+
+
+class DesignsView(View):
+    def get(self, request):
+        designs = Design.objects.all()
+        size = ['large', "medium", "small"]
+        return render(request, 'styles.html', context={'size': size, "designs": designs})
