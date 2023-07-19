@@ -1,3 +1,4 @@
+# Imports
 from django.conf import settings
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
@@ -12,9 +13,15 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 
+# Local imports
 from core.models import Artist, Design, Appointment
-from .forms import RegisterForm, LoginForm, EditProfileForm, PasswordChangeForm, AppointmentForm
+from .forms import (RegisterForm,
+                    LoginForm,
+                    EditProfileForm,
+                    PasswordChangeForm,
+                    AppointmentForm)
 
+# Questions and answers for FAQ page
 faqs = [
     {
         "question": "How do I book an appointment?",
@@ -59,30 +66,37 @@ faqs = [
 ]
 
 
+# Class for home page view
 class HomeView(View):
     def get(self, request):
         artists = Artist.objects.all()
         return render(request, 'index.html', context={"artists": artists})
 
 
+# Class for artists page view
 class ArtistView(ListView):
     model = Artist
     template_name = 'artists.html'
     context_object_name = 'artists'
 
 
+# Class for styles page view
 class DesignsView(View):
     def get(self, request):
         designs = Design.objects.all()
         size = ['large', "medium", "small"]
-        return render(request, 'styles.html', context={'size': size, "designs": designs})
+        return render(request, 'styles.html',
+                      context={'size': size, "designs": designs})
 
 
+# Class for FAQ page view
 class FAQView(View):
     def get(self, request):
         return render(request, 'faq.html', context={"faqs": faqs})
 
 
+# Class for registration
+# https://dev.to/earthcomfy/creating-a-django-registration-login-app-part-i-1di5
 class RegisterView(View):
     form_class = RegisterForm
     initial = {'key': 'value'}
@@ -106,6 +120,8 @@ class RegisterView(View):
         return render(request, self.template_name, {'form': form})
 
 
+# Class for login
+# https://dev.to/earthcomfy/creating-a-django-registration-login-app-part-i-1di5
 class CustomLoginView(LoginView):
     form_class = LoginForm
 
@@ -113,16 +129,14 @@ class CustomLoginView(LoginView):
         remember_me = form.cleaned_data.get('remember_me')
 
         if not remember_me:
-            # set session expiry to 0 seconds. So it will automatically close the session after the browser is closed.
             self.request.session.set_expiry(0)
 
-            # Set session as modified to force data updates/cookie to be saved.
             self.request.session.modified = True
 
-        # else browser session will be as long as the session cookie time "SESSION_COOKIE_AGE" defined in settings.py
         return super(CustomLoginView, self).form_valid(form)
 
 
+# Class for logout
 class LogoutView(View):
     def get(self, request):
         logout(request)
@@ -130,13 +144,15 @@ class LogoutView(View):
         return redirect('home')
 
 
+# Class for edit profile
 class EditProfileView(View):
     def get(self, request):
         user = request.user
         if not user:
             return redirect('login')
         profile = EditProfileForm(initial={
-                                  'first_name': user.first_name, 'last_name': user.last_name})
+                                  'first_name': user.first_name,
+                                  'last_name': user.last_name})
         username = request.user.username
         context = {'profile': profile}
         return render(request, 'edit_profile.html', context)
@@ -156,7 +172,9 @@ class EditProfileView(View):
                     user.first_name = form.cleaned_data['first_name']
                     user.last_name = form.cleaned_data['last_name']
                     form.save()
-                    messages.success(request, "Your profile has been successfully updated!")
+                    messages.success(request, 
+                                     "Your profile has "
+                                     "been successfully updated!")
                     return redirect('home')
         else:
             messages.error(request, "Please provide valid information")
@@ -165,6 +183,7 @@ class EditProfileView(View):
         return render(request, 'edit_profile.html', context)
 
 
+# Class for password change
 class PasswordChangeView(View):
     def get(self, request):
         user = request.user
@@ -193,14 +212,16 @@ class PasswordChangeView(View):
             # Redirect to the same page after successful password change
             return redirect('home')
         else:
-            messages.error(request, 'Please provide your old password and confirm the new one')
+            messages.error(request,
+                           'Please provide your old '
+                           'password and confirm the new one')
 
         context = {"change_password": change_password}
         return render(request, 'edit_password.html', context)
 
 
+# Class for appointment booking
 class CreateAppointmentView(LoginRequiredMixin, View):
-    
     template_name = 'appointment_form.html'
     login_url = '/login/?next=/appointment/create/'
 
@@ -220,7 +241,8 @@ class CreateAppointmentView(LoginRequiredMixin, View):
             appointment = form.save(commit=False)
             appointment.user = request.user
             appointment.save()
-            messages.success(request, "Appointment was requested successfully!")
+            messages.success(request, "Appointment was requested "
+                             "successfully! We will be in touch shortly.")
             return redirect('appointment')
 
         return render(request, 'appointment_form.html', {'form': form})
@@ -231,6 +253,7 @@ class CreateAppointmentView(LoginRequiredMixin, View):
         return super().dispatch(request, *args, **kwargs)
 
 
+# Class for viewing appointments
 class AppointmentView(LoginRequiredMixin, View):
     template_name = 'appointment.html'
     login_url = '/login/?next=/appointments/'
@@ -238,12 +261,14 @@ class AppointmentView(LoginRequiredMixin, View):
 
     def get(self, request):
         appointments = Appointment.objects.filter(user__email=request.user.email)
-        return render(request, self.template_name, {'appointments': appointments})
+        return render(request, self.template_name,
+                      {'appointments': appointments})
 
 
+# Class for deleting appointments
 class AppointmentDeleteView(DeleteView):
     def post(self, request, appointment_id):
-        appointment_to_delete = Appointment.objects.get(id = appointment_id)
+        appointment_to_delete = Appointment.objects.get(id=appointment_id)
         appointment_to_delete.delete()
         messages.success(request, "Appointment has been successfully deleted!")
-        return redirect('appointment') 
+        return redirect('appointment')

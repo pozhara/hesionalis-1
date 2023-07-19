@@ -1,6 +1,8 @@
 {% extends "base.html" %}
-{% block title %} Login Page {% endblock title%}
 {% block content %}
+
+<!-- https://dev.to/earthcomfy/creating-a-django-registration-login-app-part-i-1di5 -->
+
 <div class="form-content my-3 p-3">
     <div class="container">
         <div class="row justify-content-center">
@@ -32,6 +34,14 @@
                                     <div class="form-group">
                                         <label class="small mb-1">Password</label>
                                         {{ form.password }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-10 offset-md-1">
+                                    <div class="form-group">
+                                        {{ form.remember_me }}
+                                        <label> Remember me</label>
                                     </div>
                                 </div>
                             </div>

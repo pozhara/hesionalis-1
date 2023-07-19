@@ -1,3 +1,4 @@
+# Imports
 import uuid
 from django.db import models
 from django.contrib.auth.models import User
@@ -5,11 +6,7 @@ from cloudinary.models import CloudinaryField
 
 # Create your models here.
 
-PREFERRED_CONTACT_WAY = [
-    ("Phone call", "Phone call"),
-    ("Email", "Email")
-]
-
+# Choices for forms
 GENDER = [
     ('Male', "Male"),
     ("Female", "Female"),
@@ -65,26 +62,36 @@ TATTOO_CATEGORY = [
 ]
 
 
+# Class for artists
 class Artist(models.Model):
     name = models.CharField(max_length=100)
     image_url = models.CharField(max_length=200, null=True)
-    skills = models.CharField(max_length=30, choices=TATTOO_CATEGORY, null=True, blank=True)
+    skills = models.CharField(max_length=30,
+                              choices=TATTOO_CATEGORY, null=True, blank=True)
     gender = models.CharField(max_length=10, choices=GENDER)
 
     def __str__(self):
         return f"{self.name}"
 
 
+# Class for appointments
 class Appointment(models.Model):
-    id = models.UUIDField(primary_key = True, default = uuid.uuid4, editable = False)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     created_on = models.DateTimeField(auto_now_add=True)
-    tattoo_location = models.CharField(max_length=30, choices=TATTOO_LOCATION, null=True, blank=True)
+    tattoo_location = models.CharField(max_length=30,
+                                       choices=TATTOO_LOCATION,
+                                       null=True, blank=True)
     tattoo_size = models.CharField(max_length=3, choices=TATTOO_SIZE)
-    tattoo_category = models.CharField(max_length=30, choices=TATTOO_CATEGORY, null=True, blank=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="website_user")
-    artist = models.ForeignKey(Artist, on_delete=models.CASCADE, null=True, blank=True, related_name="appointment_artist")
+    tattoo_category = models.CharField(max_length=30,
+                                       choices=TATTOO_CATEGORY,
+                                       null=True, blank=True)
+    user = models.ForeignKey(User,
+                             on_delete=models.CASCADE,
+                             related_name="website_user")
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE,
+                               null=True, blank=True,
+                               related_name="appointment_artist")
     status = models.IntegerField(choices=APPOINTMENT_STATUS, default=0)
-    contact_way = models.CharField(max_length=20, choices=PREFERRED_CONTACT_WAY, null=True, blank=True)
 
     class Meta:
         ordering = ['-created_on', 'artist']
@@ -93,12 +100,13 @@ class Appointment(models.Model):
         return f"{self.user}"
 
 
+# Class for styles
 class Design(models.Model):
     image = models.CharField(max_length=200, null=True)
     category = models.CharField(max_length=100, choices=TATTOO_CATEGORY)
-    artist = models.ForeignKey(Artist, on_delete=models.CASCADE, null=True, blank=True, related_name="design_artist")
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE,
+                               null=True, blank=True,
+                               related_name="design_artist")
 
     def __str__(self):
         return f"{self.category}"
-
-
