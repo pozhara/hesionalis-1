@@ -3,7 +3,7 @@
 
 <div>
     <div class="text-center font-2">
-        <h1 class="color my-3">Profile</h1>
+        <h1 class="color my-3 text-uppercase">Profile</h1>
         <form method="post">
             {% csrf_token %}
             <div class="py-3 text-center">
@@ -17,14 +17,9 @@
                 <div class="mt-2">{{profile.last_name}}</div>
             </div>
 
-            <div class="text-center pt-3">
-                <label for="phone_number" class="color">Phone Number:</label>
-                <div class="mt-2">{{profile.phone_number}}</div>
-            </div>
-
-            <button type="submit" class="btn bg-btn-color btn-xl text-uppercase text-white my-2"><span>Save
+            <button type="submit" class="btn bg-btn-color btn-xl text-uppercase text-white my-2 dark-blue"><span>Save
                     Changes</span></button>
-            <div><a href="{% url 'edit_password' %}" class="btn bg-btn-color-2 btn-xl text-uppercase mt-2">Change
+            <div><a href="{% url 'edit_password' %}" class="btn bg-btn-color-2 btn-xl text-uppercase mt-2 dark-yellow">Change
                     Password</a></div>
 
 

@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from core import views
 from core.forms import LoginForm
 from core.views import (HomeView,
                         ArtistView,
@@ -48,5 +49,7 @@ urlpatterns = [
     path('appointment/', AppointmentView.as_view(), name='appointment'),
     path('appointments/delete/<str:appointment_id>',
          AppointmentDeleteView.as_view(), name="delete_appointment"),
+    path('appointments/<str:appointment_id>/edit/',
+         views.appointment_update, name='edit_appointment'),
     path('admin/', admin.site.urls),
 ]

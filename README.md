@@ -1,108 +1,466 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Hesionalis
 
-Welcome pozhara,
+Hesionalis is a full-stack, responsive website built for a fictional tattoo business for educational purposes only.
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+It provides the user value in learning about the business and the services it provides. It has a booking page which allows users to create an account and then book, view and delete appointments.
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **September 1, 2021**
+# Overview
 
-## Gitpod Reminders
+Hesionalis is a responsive, mobile-first build website. It is compatible with all current major browsers. The website was built using Bootstrap and the Django Framework. It gives users the ability to register for an account and book appointments.
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+# User stories
 
-`python3 -m http.server`
+This project was created using agile methodology. Github issues were used to record user stories. The MoSCoW Method of Prioritisation was also used, each user story was tagged as 'must-have', 'should-have' or 'could-have'.
 
-A blue button should appear to click: _Make Public_,
+**Epic 1: Set up**
+- Install Django and supporting libraries
+- Create Django project and app
 
-Another blue button should appear to click: _Open Browser_.
+**Epic 2: First deployment**
+- Create Heroku app and postgreSQL database
+- Connect to Cloudinary
+- Deploy
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+**Epic 3: Models**
 
-A blue button should appear to click: _Make Public_,
+**Epic 4: User registration and authentication**
+- Registration
+- Login
+- Logout
 
-Another blue button should appear to click: _Open Browser_.
+**Epic 5: Profile**
+- View profile
+- Edit profile
 
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+**Epic 6: Appointments**
+- Book an appointment
+- View appointment
+- Delete appointment
+- Edit appointment
 
-To log into the Heroku toolbelt CLI:
+**Epic 7: Documentation**
 
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+I liked using this methodology, makes you keep your eyes on your progress and provides satisfaction from moving user stories into 'done' section.
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
+# User Experience (UX)
 
-------
+## Website goals
+Hesionalis aims to offer users great experience getting their tattoos. It has home page with services listed, artists page and styles page so that the user can see if hesionalis fits their vision or not, and having some nonbinary people on team, it provides a safe space for queer people. The target audience is people from 18 years old.
 
-## Release History
+## User Stories
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+User stories revolved around three groups (developer, owner and user) to tick off their basic needs with this project.
 
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
+**Business owner:**
+- Admin panel
+- Accept or reject appointments
+- Encouragement to book an appointment
 
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
+**Developer:**
+- Installation
+- Deployment
+- Admin panel
+- Models
 
-**July 2 2021:** Remove extensions that are not available in Open VSX.
+**User:**
+- Home, artists, styles, FAQ pages
+- Alert messages
+- Register, Login, Logout
+- Profile
+- Appointment
 
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
+# Structure
 
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
+The structure is simple and responsive. 
 
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
+The navigation menu displays logo and links to other pages. Links become a hamburger icon on smaller screens. The navigation is repeated on all pages.
 
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
+The footer provides social links which open in a new tab, location, open times, phone number and email, and links to other pages.
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
+The home page displays information about the parlor, services hesionalis provides, founders and encouragement to book an appointment.
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
+The artists page displays artists, their names, skills and gender.
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
+The styles page displays parlor's portfolio with style's name.
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
+Registration, login and logout pages can be accessed in the navigation menu. 
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
+Profile page, which is only accessible to logged in users, contains first and last name fields to alter and a link below to change password.
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
+The booking page can be accessed on almost every page in main body of template and in the navigation menu and footer. It contains booking form and redirects to appointments.
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
+The appointment page displays all appointments booked and a button to delete or edit each of them. If appointment was accepted or rejected, then user doesn't have an option to edit it. If there are no appointments, it is shown too.
 
-------
+<details><summary>The database schema</summary>
 
-## FAQ about the uptime script
+![Booking page](media/models.jpg)
 
-**Why have you added this script?**
+</details>
 
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
+## Surface
 
-**How will this affect me?**
+I used four colors in different shades. Black, white, beige and purple.
 
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
+Black was used as the main background and text color.
 
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
+White was used for text color, particularly in navigation menu and footer.
 
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
+Beige was used for background and text color.
 
-**So….?**
+Purple was used for buttons.
 
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
+## Typography
 
-**Can I opt out?**
+Google Fonts League Spartan and Rubik were used to create this website.
 
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
+## Icons
 
-```
-pkill uptime.sh
-rm .vscode/uptime.sh
-```
+Font Awesome was used to add icons to the website, social icon in the footer and founder's social links, and services icons.
 
-**Anything more?**
+# Features
 
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
+## Existing features
 
----
+**Navigation menu**
 
-Happy coding!
+Featured on all pages,links become a hamburger icon on smaller screens, includes links to:
+
+- home page, accessible via logo;
+
+- artists page;
+
+- styles page;
+
+- booking page;
+
+- FAQ page;
+
+- login page if not logged in;
+
+- appointments page if logged in;
+
+- profile page if logged in;
+
+- logout if logged in.
+
+**Footer**
+
+Featured on all pages, includes:
+
+- social links;
+
+- links to other pages;
+
+- location;
+
+- open time;
+
+- contact information.
+
+**Home page**
+
+Includes:
+
+- photo of word tattoo in a heart;
+
+- encouragement to book an appointment;
+
+- three works done by top artists;
+
+- services;
+
+- founders.
+
+<details><summary>Screenshots of home page</summary>
+
+![Navigation menu and hero image](media/homepage1.jpg)
+
+![About us](media/homepage2.jpg)
+
+![Portfolio](media/homepage4.jpg)
+
+![Services](media/homepage6.jpg)
+
+![Founders](media/homepage3.jpg)
+
+![Reviews](media/homepage5.jpg)
+
+![Footer](media/homepage7.jpg)
+
+</details>
+
+**Artists page**
+
+Displays information about every artists: their name, main skill and gender with a link to booking under.
+
+<details><summary>Screenshots of artists page</summary>
+
+![First section](media/artistspage1.jpg)
+
+![Second section](media/artistspage2.jpg)
+
+![Third section](media/artistspage3.jpg)
+
+</details>
+
+**Styles page**
+
+Displays different tattoo styles done by hesionalis artists.
+
+<details><summary>Screenshots of styles page</summary>
+
+![First section](media/stylespage1.jpg)
+
+![Second section](media/stylespage2.jpg)
+
+![Third section](media/stylespage3.jpg)
+
+</details>
+
+**FAQ page**
+
+Displays most asked questions.
+
+<details><summary>Screenshot of FAQ page</summary>
+
+![FAQ page](media/faqpage.jpg)
+
+</details>
+
+**Registration**
+
+Redirects to login page after completing.
+
+Registration form includes:
+
+- first name;
+
+- last name;
+
+- username;
+
+- email;
+
+- password.
+
+<details><summary>Screenshot of registration page</summary>
+
+![Registration page](media/registerpage.jpg)
+
+</details>
+
+**Login**
+
+Redirects to home page after completing.
+
+Login form includes username and password.
+
+<details><summary>Screenshot of login page</summary>
+
+![Login page](media/loginpage.jpg)
+
+</details>
+
+**Logout**
+
+Logs out the user and displays a success message, appointment and profile links dissapear, login link appears.
+
+**Booking**
+
+Redirects to appointments after completing, a success message saying that hesionalis staff will be in touch soon pops up. The reason for not giving users the ability to pick time is because of tattoo appointment's unpredictability, session times vary depending on tattoo style and size, as well as the chosen body part because a client can ask for numbing cream to be applied and this can take up to 30 minutes to do. In the end I decided it's better for staff to contact the client so they could provide more information that's needed to know how much their tattoo appointment will last.
+
+Booking form includes:
+
+- artist;
+
+- tattoo location;
+
+- tattoo size;
+
+- tattoo category.
+
+<details><summary>Screenshot of booking page</summary>
+
+![Booking page](media/bookingpage.jpg)
+
+</details>
+
+**Appointments**
+
+Displays all appointments and their information, such as:
+
+- artist;
+
+- tattoo location;
+
+- tattoo size;
+
+- tattoo category;
+
+- created on time;
+
+- status of booking.
+
+<details><summary>Screenshot of appointments page</summary>
+
+![Appointment page](media/appointmentspage.jpg)
+
+</details>
+
+**Edit appointment**
+
+Includes all the same fields as appointment form but with prepopulated fields.
+
+<details><summary>Screenshot of edit appointment page</summary>
+
+![Edit Appointment page](media/editappointmentpage.jpg)
+
+</details>
+
+**Profile**
+
+Displays first and last name to the user so they can edit them. Includes a link below to change password.
+
+<details><summary>Screenshots of profile page</summary>
+
+![Edit profile page](media/profilepage.jpg)
+
+![Update password page](media/updatepasswordpage.jpg)
+
+</details>
+
+## Future features
+
+- phone number in registration. I couldn't find a way to fully validate phone number field without using a library that needs a lot of other libraries installed beforehand.
+
+- automated email messages for registration and appointment booking.
+
+- forgot/reset password feature.
+
+# Technologies used
+
+## Languages
+
+HTML
+
+CSS
+
+Python
+
+## Libraries and frameworks
+
+Django - Python Web Framework
+
+Gunicorn - Python WSGI HTTP server
+
+PostgreSQL - Database system
+
+Psycopg2 - PostgreSQL database adapter for Python
+
+Cloudinary - Media file storage
+
+Heroku - Hosting apps service
+
+ElephantSQL - PostgreSQL database hosting service
+
+SQLite3 - Database provided by Django
+
+Bootstrap - Framework for creating responsive websites
+
+## Tools
+
+Gitpod - Cloud development environment
+
+Github - Cloud based git repository
+
+W3C Validator - HTML Validator
+
+W3C CSS Validator - CSS Validator
+
+Code Institute Python Linter - Python Validator
+
+Chrome Devtools - Web Developer Tools
+
+Google Fonts - Fonts
+
+Font Awesome - Icons
+
+LucidChart - Diagram
+
+Freepik - Pictures
+
+# Testing
+
+# Bugs
+
+**First deployment bug**
+
+Heroku showed an error messages, saying the app couldn't be deployed due to issues. I checked the set up code and nothing was wrong so I checked config vars and noticed I didn't add disable collect static config var. The app was deployed successfully after adding it.
+
+**Edit profile and password links not working**
+
+Checked StackOverflow on this issue and it was resolved after moving the urls in urls.py to the top.
+
+This question on StackOverflow helped me: [405 Error - StackOverflow](https://stackoverflow.com/questions/22983222/405-post-method-not-allowed#:~:text=%22Raised%20when%20an%20incoming%20request,handler%20method%20on%20the%20view.%22&text=Basically%20that%20error%20means%20that,are%20calling%20the%20proper%20one.)
+
+**Passing on a primary key to a field in a model and then deleting it**
+
+Originally I had another repository for this project but then I passed on a primary key to a model when I tried using id for appointments but couldn't, tried managing appointments using a primary key but didn't manage so I tried removing the primary key and migrating the changes. The terminal printed out that the field is supposed to have a default and asking for it, I didn't know what default to give to it. I googled it and all answers were saying that you have to answer '', I did it and the database crushed. I tried reversing the last migration but I didn't manage to do it. In the end I decided to create a new repository. 
+
+You can find the old repository [here](https://github.com/pozhara/hesionalis)
+
+# Deployment
+
+Deployed early on to avoid any issues at the end of the project.
+
+## First deployment
+
+### Set up
+
+- Create the Heroku app
+
+- Create postgreSQL database
+
+- Create the env.py file
+
+- Modify settings.py
+
+- Connect database to Heroku
+
+- Set up Cloudinary
+
+- Set up templates directory
+
+- Add Heroku hostname to allowed hosts
+
+- Create Procfile
+
+### Deploy
+
+- Click on the app and deploy
+
+- Choose Github for deployment method
+
+- Select your repository
+
+- Click 'Deploy'
+
+# Credits
+
+## Code
+
+Registration, Login and partially Profile: [Django - Update User Profile](https://dev.to/earthcomfy/creating-a-django-registration-login-app-part-i-1di5)
+
+Edit appointment adapted from [Update a Model Object With a ModelForm](https://openclassrooms.com/en/courses/6967196-create-a-web-application-with-django/7349667-update-a-model-object-with-a-modelform)
+
+Took and adapted parts from this template into my ones: [Agency - Start Bootstrap](https://startbootstrap.com/theme/agency)
+
+Success and error messages: [StudyGyaan](https://www.youtube.com/watch?v=VIx3HD2gRWQ)
+
+Sources I referred to a lot:
+
+[Bootstrap Documentation](https://getbootstrap.com/docs/4.1/getting-started/introduction/)
+
+## Media
+
+All pictures are from [Freepik](https://www.freepik.com/)

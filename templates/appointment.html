@@ -25,15 +25,15 @@
                 {%endif%}
             </div>
         </div>
+        {% if appointment.status == 0 %}
+        <div class="text-center font-2 mb-2">
+            <button class="cursor-pointe btn bg-btn-color-2 btn-xl text-uppercase dark-yellow"><a href="{% url 'edit_appointment' appointment.id %}" class="link-dark">Edit</a></button>
+        </div>
+        {% endif %}
         <div>
             <form method="post" action="{% url 'delete_appointment' appointment.id %}" class="text-center font-2">
                 {% csrf_token %}
-
-
-
-                <button type="submit" class="cursor-pointer" class="btn bg-btn-color btn-xl text-uppercase text-white">Delete</button>
-
-
+                <button type="submit" class="cursor-pointer btn bg-btn-color btn-xl text-uppercase text-white dark-blue">Delete</button>
             </form>
         </div>
     </div>

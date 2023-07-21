@@ -84,3 +84,15 @@ body {
 #register-link a:hover{
   color:white;
 }
+
+a{
+  text-decoration:none;
+}
+
+.dark-blue:hover{
+  background-color:rgb(6, 6, 56);
+}
+
+.dark-yellow:hover{
+  background-color:#fadbaf;
+}

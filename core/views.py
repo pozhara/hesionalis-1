@@ -8,7 +8,7 @@ from django.contrib.auth.hashers import make_password
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.views import View
-from django.views.generic import ListView, CreateView, TemplateView, DeleteView
+from django.views.generic import ListView, CreateView, TemplateView, DeleteView, UpdateView
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
@@ -24,44 +24,67 @@ from .forms import (RegisterForm,
 # Questions and answers for FAQ page
 faqs = [
     {
-        "question": "How do I book an appointment?",
-        "answer": "Provide information about the booking process, such as whether appointments are made online, over the phone, or in person. Mention any specific requirements or steps involved in securing a tattoo appointment."
+        "question": "Is it safe to get a tattoo at your salon?",
+        "answer": "Absolutely! Safety is our top priority. We adhere "
+                  "to strict hygiene standards and use only single-use, "
+                  "sterilized equipment. Our artists are licensed "
+                  "professionals, ensuring a safe and clean environment "
+                  "for all our clients."
     },
     {
-        "question": "Is there a minimum age requirement for getting a tattoo?",
-        "answer": "Explain the legal age requirements for getting a tattoo in your location. If there are any additional policies or restrictions regarding age, such as parental consent for minors, include that information as well."
+        "question": "What should I consider before getting a tattoo?",
+        "answer": "Before getting a tattoo, think about the design, size, "
+                  "and placement carefully. Research our artists' portfolios "
+                  "and communicate your ideas with them to ensure your vision "
+                  "comes to life. Additionally, consider the aftercare "
+                  "requirements and the commitment involved in having"
+                  " a tattoo."
     },
     {
-        "question": "How much does a tattoo cost?",
-        "answer": "Address the question of pricing by explaining that tattoo costs vary depending on factors such as the size, design complexity, placement, and the artist's experience. Consider providing a general price range or mentioning that pricing is determined during a consultation."
+        "question": "Can I bring my own design, or do you offer custom"
+                    " designs?",
+        "answer": "Both options are available! You can bring your design, and "
+                  "our skilled artists can adapt it to your preferences"
+                  " and body placement. Alternatively, our artists can create "
+                  "custom designs tailored specifically to your ideas and"
+                  " desires."
     },
     {
-        "question": "Do you require a deposit for appointments?",
-        "answer": "Inform customers about your deposit policy, including whether a deposit is required to secure an appointment and any refund or rescheduling policies associated with deposits."
+        "question": "How much will my tattoo cost?",
+        "answer": "Tattoo prices vary depending on size, complexity, "
+                  "and the time it takes to complete. During your "
+                  "consultation, our artists will provide an accurate "
+                  "estimate based on your design and requirements."
     },
     {
-        "question": "How should I prepare for my tattoo appointment?",
-        "answer": "Offer guidance on how clients should prepare themselves before their appointment, such as avoiding alcohol or blood-thinning medications, staying hydrated, and eating a good meal beforehand."
+        "question": "Do tattoos hurt?",
+        "answer": "The level of pain varies from person to person, "
+                  "as everyone has a different pain tolerance. "
+                  "Generally, tattoos can be uncomfortable, but "
+                  "many people find the experience manageable and "
+                  "well worth the result."
     },
     {
-        "question": "What safety measures do you have in place?",
-        "answer": "Highlight the importance of safety and cleanliness in your studio. Explain the measures you take to ensure a sterile environment, including the use of disposable needles, sterilization techniques, and adherence to health regulations."
+        "question": "Do you offer tattoo removal services?",
+        "answer": "As of now, we don't offer tattoo removal "
+                  "services. Our expertise lies in creating "
+                  "beautiful tattoos that you'll cherish for a "
+                  "lifetime. If you're interested in removal options,"
+                  " we can recommend specialized clinics or professionals."
     },
     {
-        "question": "Can I bring my own design, or do you provide custom designs?",
-        "answer": "Explain whether clients can bring their own tattoo design ideas or if you offer custom design services. Describe any consultation process involved in turning their ideas into a unique tattoo design."
+        "question": "Is there an age restriction for getting a tattoo?",
+        "answer": "Yes, you must be at least 18 years old to get a tattoo"
+                  " without parental consent. We require a valid ID to "
+                  "confirm your age before proceeding with any"
+                  " tattoo services."
     },
     {
-        "question": "How long does the tattoo process take?",
-        "answer": "Provide a general estimate of the time required for different tattoo sizes or design complexities. Emphasize that tattooing is a meticulous process and that the duration can vary depending on factors like the design, client comfort, and breaks."
-    },
-    {
-        "question": "How do I take care of my tattoo after getting it done?",
-        "answer": "Offer aftercare instructions to help clients properly care for their new tattoo. Include information on cleaning, moisturizing, avoiding direct sunlight, and any specific aftercare products you recommend."
-    },
-    {
-        "question": "Can I see examples of your previous work?",
-        "answer": "Direct clients to your portfolio, either on your website or social media platforms, where they can view examples of your artists' previous work. Highlight the versatility and quality of your artists' tattooing styles."
+        "question": "How should I take care of my new tattoo?",
+        "answer": "Aftercare is crucial for proper healing and to "
+                  "maintain the quality of your tattoo. We'll provide you"
+                  " with detailed aftercare instructions after your session "
+                  "to ensure your tattoo heals perfectly."
     }
 ]
 
@@ -272,3 +295,21 @@ class AppointmentDeleteView(DeleteView):
         appointment_to_delete.delete()
         messages.success(request, "Appointment has been successfully deleted!")
         return redirect('appointment')
+
+
+# Function for editing appointments
+# https://openclassrooms.com/en/courses/6967196-create-a-web-application-with-django/7349667-update-a-model-object-with-a-modelform
+def appointment_update(request, appointment_id):
+    appointment = Appointment.objects.get(id=appointment_id)
+
+    if request.method == 'POST':
+        form = AppointmentForm(request.POST, instance=appointment)
+        if form.is_valid():
+            # update the existing `Band` in the database
+            form.save()
+            # redirect to the detail page of the `Band` we just updated
+            return redirect('appointment')
+    else:
+        form = AppointmentForm(instance=appointment)
+
+    return render(request, 'edit_appointment.html', {'form': form})
