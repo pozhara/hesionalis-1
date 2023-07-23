@@ -21,7 +21,7 @@ This project was created using agile methodology. Github issues were used to rec
 - Connect to Cloudinary
 - Deploy
 
-**Epic 3: Models**
+**Epic 3: Models and admin panel**
 
 **Epic 4: User registration and authentication**
 - Registration
@@ -29,16 +29,14 @@ This project was created using agile methodology. Github issues were used to rec
 - Logout
 
 **Epic 5: Profile**
-- View profile
 - Edit profile
+- Change password
 
 **Epic 6: Appointments**
 - Book an appointment
 - View appointment
 - Delete appointment
 - Edit appointment
-
-**Epic 7: Documentation**
 
 I liked using this methodology, makes you keep your eyes on your progress and provides satisfaction from moving user stories into 'done' section.
 
@@ -90,6 +88,8 @@ Profile page, which is only accessible to logged in users, contains first and la
 The booking page can be accessed on almost every page in main body of template and in the navigation menu and footer. It contains booking form and redirects to appointments.
 
 The appointment page displays all appointments booked and a button to delete or edit each of them. If appointment was accepted or rejected, then user doesn't have an option to edit it. If there are no appointments, it is shown too.
+
+I haven't created any mockups for this project as I am better at coming up with ideas when I code, in opposite to when I try to think any ideas on the spot meanwhile not coding.
 
 <details><summary>The database schema</summary>
 
@@ -175,7 +175,7 @@ Includes:
 
 ![Navigation menu and hero image](media/homepage1.jpg)
 
-![About us](media/homepage2.jpg)
+![About us](media/homepage8.jpg)
 
 ![Portfolio](media/homepage4.jpg)
 
@@ -390,6 +390,372 @@ LucidChart - Diagram
 Freepik - Pictures
 
 # Testing
+
+## Code Validation
+
+### HTML
+
+HTML code was tested using the [W3C Validator](https://validator.w3.org/) via text input. The HTML code was copied and pasted in from each page of the website's source code.
+
+<details><summary>Screenshots of results</summary>
+
+**Home page**
+
+![Validation of home page](media/validatorhome.jpg)
+
+**Artits page**
+
+![Validation of artists page](media/validatorartists.jpg)
+
+**Styles page**
+
+![Validation of styles page](media/validatorstyles.jpg)
+
+**FAQ page**
+
+![Validation of FAQ page](media/validatorfaq.jpg)
+
+**Booking page**
+
+![Validation of booking page](media/validatorbooking.jpg)
+
+**Appointments page**
+
+![Validation of appointments page](media/validatorapointments.jpg)
+
+**Edit appointment page**
+
+![Validation of edit appointments page](media/validatorbooking.jpg)
+
+**Profile page**
+
+![Validation of profile page](media/validatorprofile.jpg)
+
+**Change password page**
+
+![Validation of change password page](media/validatorpassword.jpg)
+
+**Registration page**
+
+![Validation of registration page](media/validatorregister.jpg)
+
+**Login page**
+
+![Validation of login page](media/validatorsignin.jpg)
+
+</details>
+
+### CSS
+
+CSS code was tested using the [W3C CSS Validator]() via text input.
+
+<details><summary>Screenshot of results</summary>
+
+![CSS Validation Results](media/validatorcss.jpg)
+
+</details>
+
+### Python
+
+Python code was tested using [Code Institute's Python Linter](https://pep8ci.herokuapp.com/).
+
+<details><summary>Screenshots of results</summary>
+
+**hesionalis**
+
+- settings.py
+
+![settings.py validation](media/settingsvalidator.jpg)
+
+"Line too long" errors are caused by Django generated code and one of those errors is due to STATICFILES_STORAGE variable.
+
+- urls.py
+
+![urls.py validation](media/urlsvalidator.jpg)
+
+**core**
+
+- admin.py
+
+![admin.py validation](media/adminvalidator.jpg)
+
+- forms.py
+
+![forms.py validation](media/formsvalidator.jpg)
+
+You can see the line on the photo, it's an import.
+
+- models.py
+
+![models.py validation](media/modelsvalidator.jpg)
+
+- views.py
+
+![views.py validation](media/viewsvalidator.jpg)
+
+You can see the line on the photo.
+
+</details>
+
+## Responsiveness
+
+Manual tests were done using Chrome DevTools. 
+
+Small screen: iPhone SE (375 x 667)
+
+Medium screen: iPad Air (820 x 1180)
+
+Large screen: Nest Hub (1024 x 600)
+
+<details><summary>Screenshots of all pages on different screens</summary>
+
+**Home page**
+
+Navigation menu and hero image
+
+![Navigation menu and hero image on small screen](media/nav1.jpg)
+
+![Navigation menu and hero image on medium screen](media/nav2.jpg)
+
+![Navigation menu and hero image on large screen](media/nav3.jpg)
+
+About us
+
+![About us section on small screen](media/aboutus1.jpg)
+
+![About us section on medium screen](media/aboutus2.jpg)
+
+![About us section on large screen](media/aboutus3.jpg)
+
+Portfolio
+
+![Portfolio section on small screen](media/portfolio1.jpg)
+
+![Portfolio section on medium screen](media/portfolio2.jpg)
+
+![Portrfolio section on large screen](media/portfolio3.jpg)
+
+Services
+
+![Services section on small screen](media/services1.jpg)
+
+![Services section on medium screen](media/services2.jpg)
+
+![Services section on large screen](media/services3.jpg)
+
+Founders
+
+![Founders section on small screen](media/founders1.jpg)
+
+![Founders section on medium screen](media/founders2.jpg)
+
+![Founders section on large screen](media/founders3.jpg)
+
+Reviews
+
+![Reviews section on small screen](media/reviews1.jpg)
+
+![Reviews section on medium screen](media/reviews2.jpg)
+
+![Reviews section on large screen](media/reviews3.jpg)
+
+Footer
+
+![Footer on small screen](media/footer1.jpg)
+
+![Footer on medium screen](media/footer2.jpg)
+
+![Footer on large screen](media/footer3.jpg)
+
+**Artists page**
+
+![Artists page on small screen](media/artists1.jpg)
+
+![Artists page on medium screen](media/artists2.jpg)
+
+![Artists page on large screen](media/artists3.jpg)
+
+**Styles page**
+
+![Styles page on small screen](media/styles1.jpg)
+
+![Styles page on medium screen](media/styles2.jpg)
+
+![Styles page on large screen](media/styles3.jpg)
+
+**Create appointment page**
+
+The edit appointment page is the same.
+
+![Create appointment page on small screen](media/appointmentform1.jpg)
+
+![Create appointment page on medium screen](media/appoitmentform2.jpg)
+
+![Create appointment page on large screen](media/appointmentform3.jpg)
+
+**FAQ page**
+
+![FAQ page on small screen](media/faq1.jpg)
+
+![FAQ page on medium screen](media/faq2.jpg)
+
+![FAQ page on large screen](media/faq3.jpg)
+
+**Profile**
+
+![Profile page on small screen](media/profile1.jpg)
+
+![Profile page on medium screen](media/profile2.jpg)
+
+![Profile page on large screen](media/profile3.jpg)
+
+![Password change page on small screen](media/password1.jpg)
+
+![Password change page on medium screen](media/password2.jpg)
+
+![Password change page on large screen](media/password3.jpg)
+
+**Login page**
+
+![Login page on small screen](media/signin1.jpg)
+
+![Login page on medium screen](media/signin2.jpg)
+
+![Login page on large screen](media/signin3.jpg)
+
+**Registration page**
+
+![Registration page on small screen](media/register1.jpg)
+
+![Registration page on medium screen](media/register2.jpg)
+
+![Registration page on large screen](media/register3.jpg)
+
+</details>
+
+## User Stories Testing
+
+User Stories were created in [GitHub Issues](). Epics 1 and 2 aren't included as they are about set up and deployment.
+
+### Epic 3: Models and admin panel
+
+- create models for the project - done
+
+- register them in admin.py file - done
+
+- create superuser - done
+
+### Epic 4: User registration and authentication
+
+- create register form, view and template, check functionality and validation - done
+
+- create login form, view and template, check functionality and validation - done
+
+- create logout view, check functionality - done
+
+### Epic 5: Profile
+
+- create form, view and template for editing profile, check functionality - done
+
+- create form, view and template for changing password, check functionality and validation - done
+
+### Epic 6: Appointments
+
+- create form, view and template for booking an appointment, check functionality and validation - done
+
+- create view and template for viewing appointments - done
+
+- create view for deleting appointments, check functionality - done
+
+- create view and template for editing appointments, check functionality - done
+
+## Feature Testing
+
+Each feature was manually tested in the browser. 
+
+<details><summary>Navigation</summary>
+
+- Links change color when you hover over them
+
+- Links' addresses show their names
+
+- Links direct to respective pages
+
+- Hamburger icon shows up on small screens
+
+</details>
+
+<details><summary>Footer</summary>
+
+- Social links brighten when hovered over
+
+- Social link redirect to a relevant social platform in a new tab when clicked
+
+- Links to local pages change font size when hovered over
+
+</details>
+
+<details><summary>Home page</summary>
+
+- Buttons change color when you hover over them
+
+- Buttons' addresses show their names
+
+- Founders' social links change color when hovered over
+
+- Founders' social links direct to relevant social platforms
+
+</details>
+
+<details><summary>Artist page</summary>
+
+- Buttons change color when you hover over them
+
+- Buttons redirect to booking
+
+</details>
+
+<details><summary>Styles page</summary>
+
+- Button changes color when you hover over it
+
+- Button redirects to booking
+
+</details>
+
+<details><summary>Booking page</summary>
+
+- Button changes color when you hover over it
+
+- Button redirects to appointments
+
+</details>
+
+<details><summary>FAQ page</summary>
+
+- Questions reveal answers when clicked and hide them when it's done again
+
+</details>
+
+<details><summary>Appointments page</summary>
+
+- Buttons change color when you hover over them
+
+- Buttons redirect to their respective pages
+
+</details>
+
+<details><summary>Profile and change password pages</summary>
+
+- Buttons change color when you hover over them
+
+</details>
+
+<details><summary>Login and registration pages</summary>
+
+- Buttons change color when you hover over them
+
+</details>
 
 # Bugs
 

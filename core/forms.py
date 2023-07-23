@@ -56,7 +56,7 @@ class RegisterForm(UserCreationForm):
                                     'data-toggle': 'password',
                                     'id': 'password',
                                 }))
-    
+
     # Email validation
     def clean_email(self):
         data = self.cleaned_data['email']
@@ -72,7 +72,7 @@ class RegisterForm(UserCreationForm):
             raise forms.ValidationError('Please '
                                         'use letters only for your first name')
         return first_name
-    
+
     # Last name validation
     def clean_last_name(self):
         last_name = self.cleaned_data['last_name']
@@ -138,7 +138,7 @@ class EditProfileForm(forms.ModelForm):
             raise forms.ValidationError('Please '
                                         'use letters only for your first name')
         return first_name
-    
+
     # Validation for last_name
     def clean_last_name(self):
         last_name = self.cleaned_data['last_name']

@@ -8,7 +8,11 @@ from django.contrib.auth.hashers import make_password
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.views import View
-from django.views.generic import ListView, CreateView, TemplateView, DeleteView, UpdateView
+from django.views.generic import (ListView,
+                                  CreateView,
+                                  TemplateView,
+                                  DeleteView,
+                                  UpdateView)
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
@@ -160,7 +164,7 @@ class CustomLoginView(LoginView):
 
 
 # Class for logout
-class LogoutView(View):
+class LogoutView(LoginRequiredMixin, View):
     def get(self, request):
         logout(request)
         messages.success(request, "You have successfully logged out")
@@ -168,7 +172,9 @@ class LogoutView(View):
 
 
 # Class for edit profile
-class EditProfileView(View):
+class EditProfileView(LoginRequiredMixin, View):
+    login_url = '/login/?next=/edit_profile'
+
     def get(self, request):
         user = request.user
         if not user:
@@ -183,7 +189,6 @@ class EditProfileView(View):
     def post(self, request):
         user = request.user
         if not user:
-            # Retrieve the user from the database
             return redirect('login')
         form = EditProfileForm(request.POST or None, instance=user)
 
@@ -195,7 +200,7 @@ class EditProfileView(View):
                     user.first_name = form.cleaned_data['first_name']
                     user.last_name = form.cleaned_data['last_name']
                     form.save()
-                    messages.success(request, 
+                    messages.success(request,
                                      "Your profile has "
                                      "been successfully updated!")
                     return redirect('home')
@@ -205,9 +210,16 @@ class EditProfileView(View):
         context = {'form': form}
         return render(request, 'edit_profile.html', context)
 
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            messages.error(request, 'Please log in to edit profile.')
+        return super().dispatch(request, *args, **kwargs)
+
 
 # Class for password change
-class PasswordChangeView(View):
+class PasswordChangeView(LoginRequiredMixin, View):
+    login_url = '/login/?next=/edit_password'
+
     def get(self, request):
         user = request.user
         if not user:
@@ -219,7 +231,6 @@ class PasswordChangeView(View):
     def post(self, request):
         user = request.user
         if not user:
-            # Retrieve the user from the database
             return redirect('login')
         change_password = PasswordChangeForm(request.user, request.POST)
 
@@ -241,6 +252,11 @@ class PasswordChangeView(View):
 
         context = {"change_password": change_password}
         return render(request, 'edit_password.html', context)
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            messages.error(request, 'Please log in to change password.')
+        return super().dispatch(request, *args, **kwargs)
 
 
 # Class for appointment booking
@@ -287,14 +303,24 @@ class AppointmentView(LoginRequiredMixin, View):
         return render(request, self.template_name,
                       {'appointments': appointments})
 
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            messages.error(request, 'Please log in to view your appointments.')
+        return super().dispatch(request, *args, **kwargs)
+
 
 # Class for deleting appointments
-class AppointmentDeleteView(DeleteView):
+class AppointmentDeleteView(LoginRequiredMixin, DeleteView):
     def post(self, request, appointment_id):
         appointment_to_delete = Appointment.objects.get(id=appointment_id)
         appointment_to_delete.delete()
         messages.success(request, "Appointment has been successfully deleted!")
         return redirect('appointment')
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            messages.error(request, 'Please log in to delete appointments.')
+        return super().dispatch(request, *args, **kwargs)
 
 
 # Function for editing appointments
@@ -313,3 +339,8 @@ def appointment_update(request, appointment_id):
         form = AppointmentForm(instance=appointment)
 
     return render(request, 'edit_appointment.html', {'form': form})
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            messages.error(request, 'Please log in to view your appointments.')
+        return super().dispatch(request, *args, **kwargs)
