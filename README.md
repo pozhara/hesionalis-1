@@ -947,6 +947,8 @@ Deployed early on to avoid any issues at the end of the project.
 
 Registration, Login and partially Profile: [Django - Update User Profile](https://dev.to/earthcomfy/creating-a-django-registration-login-app-part-i-1di5)
 
+Password change adapted from: [StackOverflow](https://stackoverflow.com/questions/57152846/apply-autocomplete-off-to-django-password-reset-confirm-form)
+
 Edit appointment adapted from [Update a Model Object With a ModelForm](https://openclassrooms.com/en/courses/6967196-create-a-web-application-with-django/7349667-update-a-model-object-with-a-modelform)
 
 Took and adapted parts from this template into my ones: [Agency - Start Bootstrap](https://startbootstrap.com/theme/agency)

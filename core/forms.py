@@ -154,6 +154,8 @@ class EditProfileForm(forms.ModelForm):
 
 
 # Form class for password change
+# Adapted from: https://stackoverflow.com/questions/57152846/apply-
+# autocomplete-off-to-django-password-reset-confirm-form
 class PasswordChangeForm(DefaultPasswordChangeForm):
     def __init__(self, user, *args, **kwargs):
         super().__init__(user, *args, **kwargs)
