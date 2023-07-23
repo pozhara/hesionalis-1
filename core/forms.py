@@ -59,10 +59,17 @@ class RegisterForm(UserCreationForm):
 
     # Email validation
     def clean_email(self):
+        special_characters = "'!#$%^&*()-+?_=,<>/"
         data = self.cleaned_data['email']
         if User.objects.filter(email=data).count() > 0:
             raise forms.ValidationError("We already "
                                         "have a user with this email")
+        if any(c in special_characters for c in data):
+            raise forms.ValidationError("Only use letters, numbers, "
+                                        "@ and . in your email.")
+        if '"' in data:
+            raise forms.ValidationError("Only use letters, numbers, "
+                                        "@ and . in your email.")
         return data
 
     # First name validation

@@ -901,6 +901,10 @@ You can find the old repository [here](https://github.com/pozhara/hesionalis)
 
 Users could copy the edit appointment url from others' accounts and successfully edit them and I couldn't get UserPassesMixin to work. But I used user's username to check if it's their appointment.
 
+**Existing bug**
+
+On change password page inputs take spaces. 
+
 # Deployment
 
 Deployed early on to avoid any issues at the end of the project.
