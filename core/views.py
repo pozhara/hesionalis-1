@@ -14,7 +14,7 @@ from django.views.generic import (ListView,
                                   DeleteView,
                                   UpdateView)
 from django.contrib.auth import update_session_auth_hash
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.views import LoginView
 
 # Local imports
@@ -293,7 +293,7 @@ class CreateAppointmentView(LoginRequiredMixin, View):
 
 
 # Class for viewing appointments
-class AppointmentView(LoginRequiredMixin, View):
+class AppointmentView(LoginRequiredMixin, UserPassesTestMixin, View):
     template_name = 'appointment.html'
     login_url = '/login/?next=/appointments/'
     context_object_name = 'appointments'
@@ -303,6 +303,12 @@ class AppointmentView(LoginRequiredMixin, View):
         return render(request, self.template_name,
                       {'appointments': appointments})
 
+    def test_func(self):
+        appointment = self.get_object()
+        if self.request.user == appointment.user:
+            return True
+        return False
+
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             messages.error(request, 'Please log in to view your appointments.')
@@ -310,12 +316,18 @@ class AppointmentView(LoginRequiredMixin, View):
 
 
 # Class for deleting appointments
-class AppointmentDeleteView(LoginRequiredMixin, DeleteView):
+class AppointmentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def post(self, request, appointment_id):
         appointment_to_delete = Appointment.objects.get(id=appointment_id)
         appointment_to_delete.delete()
         messages.success(request, "Appointment has been successfully deleted!")
         return redirect('appointment')
+
+    def test_func(self):
+        appointment = self.get_object()
+        if self.request.user == appointment.user:
+            return True
+        return False
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
@@ -325,22 +337,82 @@ class AppointmentDeleteView(LoginRequiredMixin, DeleteView):
 
 # Function for editing appointments
 # https://openclassrooms.com/en/courses/6967196-create-a-web-application-with-django/7349667-update-a-model-object-with-a-modelform
-def appointment_update(request, appointment_id):
-    appointment = Appointment.objects.get(id=appointment_id)
 
-    if request.method == 'POST':
-        form = AppointmentForm(request.POST, instance=appointment)
+
+class UpdateAppointmentView(LoginRequiredMixin, UserPassesTestMixin, View):
+    login_url = '/login/?next=/appointment'
+
+    def get(self, request, appointment_id):
+        user = request.user
+        if not user:
+            return redirect('login')
+        appointment = Appointment.objects.get(id=appointment_id)
+        form = AppointmentForm(initial={
+                               'artist': appointment.artist,
+                               'tattoo_location': appointment.tattoo_location,
+                               'tattoo_size': appointment.tattoo_size,
+                               'tattoo_category': appointment.tattoo_category})
+        context = {'form': form}
+        return render(request, 'edit_appointment.html', context)
+
+    def post(self, request, appointment_id):
+        user = request.user
+        if not user:
+            return redirect('login')
+        appointment = Appointment.objects.get(id=appointment_id)
+        form = AppointmentForm(request.POST or None, instance=appointment)
+
         if form.is_valid():
-            # update the existing `Band` in the database
-            form.save()
-            # redirect to the detail page of the `Band` we just updated
+            appointment = Appointment.objects.get(id=appointment_id)
+            if request.method == 'POST':
+                if form.is_valid():
+                    appointment.artist = form.cleaned_data['artist']
+                    appointment.tattoo_location = form.cleaned_data['tattoo_location']
+                    appointment.tattoo_size = form.cleaned_data['tattoo_size']
+                    appointment.tattoo_category = form.cleaned_data['tattoo_category']
+                    form.save()
+                    messages.success(request, "Your appointment "
+                                     "has been successfully updated!")
+                    return redirect('appointment')
+        else:
+            messages.error(request, "Please provide valid information")
             return redirect('appointment')
-    else:
-        form = AppointmentForm(instance=appointment)
+        context = {'form': form}
+        return render(request, 'edit_appointment.html', context)
 
-    return render(request, 'edit_appointment.html', {'form': form})
+    def test_func(self):
+        appointment = self.get_object()
+        if self.request.user == appointment.user:
+            return True
+        return False
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             messages.error(request, 'Please log in to edit your appointments.')
+        appointment = self.get_object()
+        if self.request.user != appointment.user:
+            messages.error(request, "You're trying to edit someone"
+                           " else's appointment")
         return super().dispatch(request, *args, **kwargs)
+
+# def appointment_update(request, appointment_id):
+#     appointment = Appointment.objects.get(id=appointment_id)
+
+#     if request.method == 'POST':
+#         form = AppointmentForm(request.POST, instance=appointment)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('appointment')
+#     else:
+#         form = AppointmentForm(instance=appointment)
+
+#     return render(request, 'edit_appointment.html', {'form': form})
+
+#    def dispatch(self, request, *args, **kwargs):
+#        if not request.user.is_authenticated:
+#            messages.error(request, 'Please log in to edit your appointments.')
+#        appointment = self.get_object()
+#        if self.request.user != appointment.user:
+#            messages.error(request, "You're trying to edit someone"
+#                           " else's appointment")
+#        return super().dispatch(request, *args, **kwargs)

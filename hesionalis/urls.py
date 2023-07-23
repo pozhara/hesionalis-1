@@ -29,7 +29,8 @@ from core.views import (HomeView,
                         PasswordChangeView,
                         CreateAppointmentView,
                         AppointmentView,
-                        AppointmentDeleteView)
+                        AppointmentDeleteView,
+                        UpdateAppointmentView)
 
 urlpatterns = [
     path('edit_profile/', EditProfileView.as_view(), name='edit_profile'),
@@ -50,6 +51,6 @@ urlpatterns = [
     path('appointments/delete/<str:appointment_id>',
          AppointmentDeleteView.as_view(), name="delete_appointment"),
     path('appointments/<str:appointment_id>/edit/',
-         views.appointment_update, name='edit_appointment'),
+         UpdateAppointmentView.as_view(), name='edit_appointment'),
     path('admin/', admin.site.urls),
 ]
