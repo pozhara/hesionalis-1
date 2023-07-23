@@ -120,16 +120,10 @@ class EditProfileForm(forms.ModelForm):
                                     'class': 'form-input',
                                     'autocomplete': 'off', }))
     last_name = forms.CharField(max_length=16,
-                                required=False,
+                                required=True,
                                 widget=forms.TextInput(attrs={
                                     'class': 'form-input',
                                     'autocomplete': 'off', }))
-
-    email = forms.EmailField(required=True,
-                             widget=forms.TextInput(attrs={
-                                'placeholder': 'Email',
-                                'class': 'form-control',
-                             }))
 
     # Validation for first name
     def clean_first_name(self):

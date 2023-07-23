@@ -4,6 +4,10 @@ Hesionalis is a full-stack, responsive website built for a fictional tattoo busi
 
 It provides the user value in learning about the business and the services it provides. It has a booking page which allows users to create an account and then book, view and delete appointments.
 
+![Website on different devices](media/devices.jpg)
+
+You can find live website [here](https://hesionalis-1-b289b988597a.herokuapp.com/)
+
 # Overview
 
 Hesionalis is a responsive, mobile-first build website. It is compatible with all current major browsers. The website was built using Bootstrap and the Django Framework. It gives users the ability to register for an account and book appointments.
