@@ -27,13 +27,13 @@
         </div>
         {% if appointment.status == 0 %}
         <div class="text-center font-2 mb-2">
-            <button class="cursor-pointe btn bg-btn-color-2 btn-xl text-uppercase dark-yellow"><a href="{% url 'edit_appointment' appointment.id %}" class="link-dark">Edit</a></button>
+            <button class="cursor-pointe btn bg-btn-color-2 btn-xl text-uppercase dark-yellow"><a href="{% url 'edit_appointment' appointment.id %}" class="link-dark" aria-label="Edit appointment">Edit</a></button>
         </div>
         {% endif %}
         <div>
             <form method="post" action="{% url 'delete_appointment' appointment.id %}" class="text-center font-2">
                 {% csrf_token %}
-                <button type="submit" class="cursor-pointer btn bg-btn-color btn-xl text-uppercase text-white dark-blue">Delete</button>
+                <button type="submit" class="cursor-pointer btn bg-btn-color btn-xl text-uppercase text-white dark-blue" aria-label="Delete appointment">Delete</button>
             </form>
         </div>
     </div>
@@ -50,7 +50,7 @@
     <div>
         <div class="font-2 text-center mt-3 mb-5">
             <a href="{% url 'create_appointment' %}"
-                class="btn bg-btn-color btn-xl text-uppercase text-white my-2">Request An Appointment</a>
+                class="btn bg-btn-color btn-xl text-uppercase text-white my-2" aria-label="Book an appointment">Request An Appointment</a>
         </div>
     </div>
 </div>

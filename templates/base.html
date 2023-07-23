@@ -14,39 +14,39 @@
 <body class="d-flex flex-column h-100 main-bg">
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-            <a href="{% url 'home' %}" class="navbar-brand font" alt="Home page">hesionalis</a>
+            <a href="{% url 'home' %}" class="navbar-brand font" aria-label="Home page">hesionalis</a>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu" aria-label="Hamburger icon">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navmenu">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a href="{% url 'artists' %}" class="nav-link" alt="Artists page">Artists</a>
+                        <a href="{% url 'artists' %}" class="nav-link" aria-label="Artists page">Artists</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{% url 'styles' %}" class="nav-link" alt="Styles page">Styles</a>
+                        <a href="{% url 'styles' %}" class="nav-link" aria-label="Styles page">Styles</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{% url 'create_appointment' %}" class="nav-link" alt="Booking">Booking</a>
+                        <a href="{% url 'create_appointment' %}" class="nav-link" aria-label="Booking">Booking</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{% url 'faq' %}" class="nav-link" alt="FAQ page">FAQ</a>
+                        <a href="{% url 'faq' %}" class="nav-link" aria-label="FAQ page">FAQ</a>
                     </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a href="{% url 'appointment' %}" class="nav-link" alt="Appointments page">Appointments</a>
+                        <a href="{% url 'appointment' %}" class="nav-link" aria-label="Appointments page">Appointments</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{% url 'edit_profile' %}" class="nav-link" alt="Profile">{{ user.username }}</a>
+                        <a href="{% url 'edit_profile' %}" class="nav-link" aria-label="Profile">{{ user.username }}</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{% url 'logout' %}" class="nav-link" alt="Logout">Logout</a>
+                        <a href="{% url 'logout' %}" class="nav-link" aria-label="Logout">Logout</a>
                     </li>
                     {%else%}
                     <li class="nav-item">
-                        <a href="{% url 'login' %}" class="nav-link" alt="Login">Login</a>
+                        <a href="{% url 'login' %}" class="nav-link" aria-label="Login">Login</a>
                     </li>
                     {%endif %}
                 </ul>
@@ -64,16 +64,16 @@
     <footer class="text-center text-white footer">
         <div class="container p-4">
             <div class="mb-4">
-                <a class="btn btn-outline-light btn-floating m-1" href="https://www.facebook.com/" role="button"  target="_blank" alt="Facebook link"><i
+                <a class="btn btn-outline-light btn-floating m-1" href="https://www.facebook.com/" role="button"  target="_blank" aria-label="Facebook link"><i
                         class="fab fa-facebook-f"></i></a>
 
-                <a class="btn btn-outline-light btn-floating m-1" href="https://twitter.com/" role="button"  target="_blank" alt="Twitter link"><i
+                <a class="btn btn-outline-light btn-floating m-1" href="https://twitter.com/" role="button"  target="_blank" aria-label="Twitter link"><i
                         class="fab fa-twitter"></i></a>
 
-                <a class="btn btn-outline-light btn-floating m-1" href="https://www.instagram.com/" role="button"  target="_blank" alt="Instagram link"><i
+                <a class="btn btn-outline-light btn-floating m-1" href="https://www.instagram.com/" role="button"  target="_blank" aria-label="Instagram link"><i
                         class="fab fa-instagram"></i></a>
 
-                <a class="btn btn-outline-light btn-floating m-1" href="https://www.linkedin.com/" role="button"  target="_blank" alt="Linkedin link"><i
+                <a class="btn btn-outline-light btn-floating m-1" href="https://www.linkedin.com/" role="button"  target="_blank" aria-label="Linkedin link"><i
                         class="fab fa-linkedin-in"></i></a>
                 </div>
             <section class="">
@@ -83,16 +83,16 @@
 
                         <ul class="list-unstyled mb-0">
                             <li>
-                                <a href="{% url 'artists' %}" class="text-white footer-link" alt="Artists page">Artists</a>
+                                <a href="{% url 'artists' %}" class="text-white footer-link" aria-label="Artists page">Artists</a>
                             </li>
                             <li>
-                                <a href="{% url 'styles' %}" class="text-white footer-link" alt="Styles page">Styles</a>
+                                <a href="{% url 'styles' %}" class="text-white footer-link" aria-label="Styles page">Styles</a>
                             </li>
                             <li>
-                                <a href="{% url 'create_appointment' %}" class="text-white footer-link" alt="Booking page">Bookings</a>
+                                <a href="{% url 'create_appointment' %}" class="text-white footer-link" aria-label="Booking page">Bookings</a>
                             </li>
                             <li>
-                                <a href="{% url 'faq' %}" class="text-white footer-link" alt="FAQ page">FAQ</a>
+                                <a href="{% url 'faq' %}" class="text-white footer-link" aria-label="FAQ page">FAQ</a>
                             </li>
                         </ul>
                     </div>
