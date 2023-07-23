@@ -761,6 +761,124 @@ Each feature was manually tested in the browser.
 
 </details>
 
+## Lighthouse Testing
+
+Lighthouse testing was done on the deployed version of the project in incognito mode.
+
+<details><summary>Screenshots of all pages</summary>
+
+## Home page
+
+**Mobile**
+
+![Lighthouse testing of home page on mobile](media/homelighthouse1.jpg)
+
+**Desktop**
+
+![Lighthouse testing of home page on desktop](media/homelighthouse2.jpg)
+
+## Artists page
+
+**Mobile**
+
+![Lighthouse testing of artists page on mobile](media/artistslighthouse1.jpg)
+
+**Desktop**
+
+![Lighthouse testing of artists page on desktop](media/artistslighthouse2.jpg)
+
+## Styles page
+
+**Mobile**
+
+![Lighthouse testing of styles page on mobile](media/styleslighthouse1.jpg)
+
+**Desktop**
+
+![Lighthouse testing of styles page on desktop](media/styleslighthouse2.jpg)
+
+## FAQ page
+
+**Mobile**
+
+![Lighthouse testing of FAQ page on mobile](media/faqlighthouse1.jpg)
+
+**Desktop**
+
+![Lighthouse testing of FAQ page on desktop](media/faqlighthouse2.jpg)
+
+## Booking page
+
+**Mobile**
+
+![Lighthouse testing of booking page on mobile](media/createappointmentlighthouse1.jpg)
+
+**Desktop**
+
+![Lighthouse testing of booking page on desktop](media/createappointmentlighthouse2.jpg)
+
+## Appointments page
+
+**Mobile**
+
+![Lighthouse testing of appointments page on mobile](media/appointmentlighthouse1.jpg)
+
+**Desktop**
+
+![Lighthouse testing of appointments page on desktop](media/appointmentlighthouse2.jpg)
+
+## Edit appointments page
+
+**Mobile**
+
+![Lighthouse testing of edit appointments page on mobile](media/editappointmentlighthouse1.jpg)
+
+**Desktop**
+
+![Lighthouse testing of edit appointments page on desktop](media/editappointmentlighthouse2.jpg)
+
+## Profile page
+
+**Mobile**
+
+![Lighthouse testing of profile page on mobile](media/profilelighthouse1.jpg)
+
+**Desktop**
+
+![Lighthouse testing of profile page on desktop](media/profilelighthouse2.jpg)
+
+## Password page
+
+**Mobile**
+
+![Lighthouse testing of password page on mobile](media/passwordlighthouse1.jpg)
+
+**Desktop**
+
+![Lighthouse testing of password page on desktop](media/passwordlighthouse2.jpg)
+
+## Login page
+
+**Mobile**
+
+![Lighthouse testing of login page on mobile](media/loginlighthouse1.jpg)
+
+**Desktop**
+
+![Lighthouse testing of login page on desktop](media/loginlighthouse2.jpg)
+
+## Registration page
+
+**Mobile**
+
+![Lighthouse testing of registration page on mobile](media/registerlighthouse1.jpg)
+
+**Desktop**
+
+![Lighthouse testing of registration page on desktop](media/registerlighthouse2.jpg)
+
+</details>
+
 # Bugs
 
 **First deployment bug**

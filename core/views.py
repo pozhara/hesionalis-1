@@ -342,5 +342,5 @@ def appointment_update(request, appointment_id):
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
-            messages.error(request, 'Please log in to view your appointments.')
+            messages.error(request, 'Please log in to edit your appointments.')
         return super().dispatch(request, *args, **kwargs)
