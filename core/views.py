@@ -313,9 +313,14 @@ class AppointmentView(LoginRequiredMixin, View):
 class AppointmentDeleteView(LoginRequiredMixin, DeleteView):
     def post(self, request, appointment_id):
         appointment_to_delete = Appointment.objects.get(id=appointment_id)
-        appointment_to_delete.delete()
-        messages.success(request, "Appointment has been successfully deleted!")
-        return redirect('appointment')
+        if request.user.username == appointment_to_delete.user.username:
+            appointment_to_delete.delete()
+            messages.success(request, "Appointment has "
+                             "been successfully deleted!")
+            return redirect('appointment')
+        else:
+            messages.error('That is not your appointment')
+            return redirect('home')
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
@@ -331,8 +336,12 @@ def appointment_update(request, appointment_id):
     if request.method == 'POST':
         form = AppointmentForm(request.POST, instance=appointment)
         if form.is_valid():
-            form.save()
-            return redirect('appointment')
+            if request.user.username == appointment.user.username:
+                form.save()
+                return redirect('appointment')
+            else:
+                messages.error('That is not your appointment')
+                return redirect('home')
     else:
         form = AppointmentForm(instance=appointment)
 
@@ -341,8 +350,4 @@ def appointment_update(request, appointment_id):
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             messages.error(request, 'Please log in to edit your appointments.')
-        appointment = self.get_object()
-        if self.request.user != appointment.user:
-            messages.error(request, "You're trying to edit someone"
-                           " else's appointment")
         return super().dispatch(request, *args, **kwargs)
