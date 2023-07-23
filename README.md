@@ -763,7 +763,7 @@ Each feature was manually tested in the browser.
 
 ## Lighthouse Testing
 
-Lighthouse testing was done on the deployed version of the project in incognito mode.
+Lighthouse testing was done on the deployed version of the project in incognito mode. Performance issues are mostly because of images being in jpg format which makes the site load slower. I will keep that in mind next time I create a project.
 
 <details><summary>Screenshots of all pages</summary>
 
@@ -896,6 +896,10 @@ This question on StackOverflow helped me: [405 Error - StackOverflow](https://st
 Originally I had another repository for this project but then I passed on a primary key to a model when I tried using id for appointments but couldn't, tried managing appointments using a primary key but didn't manage so I tried removing the primary key and migrating the changes. The terminal printed out that the field is supposed to have a default and asking for it, I didn't know what default to give to it. I googled it and all answers were saying that you have to answer '', I did it and the database crushed. I tried reversing the last migration but I didn't manage to do it. In the end I decided to create a new repository. 
 
 You can find the old repository [here](https://github.com/pozhara/hesionalis)
+
+**UserPassesTestMixin**
+
+Users could copy the edit appointment url from others' accounts and successfully edit them and I couldn't get UserPassesMixin to work. But I used user's username to check if it's their appointment.
 
 # Deployment
 

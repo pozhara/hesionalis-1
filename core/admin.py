@@ -2,8 +2,6 @@
 from django.contrib import admin
 from .models import Artist, Design, Appointment
 
-# Register your models here.
-
 
 # Register Artist model
 @admin.register(Artist)
